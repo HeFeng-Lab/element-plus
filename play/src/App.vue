@@ -6,6 +6,9 @@ import { Edit } from "@element-plus/icons-vue"
   <ELIcon :size="20" color="red">
     <Edit />
   </ELIcon>
+  <ELIcon :size="20" color="blue">
+    <Edit />
+  </ELIcon>
 </template>
 
 <style scoped></style>

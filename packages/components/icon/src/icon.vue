@@ -28,15 +28,4 @@ const styles = computed(() => {
 })
 </script>
 
-<style scoped lang="scss">
-.el-icon {
-  display: inline-flex;
-  width: 1em;
-  height: 1em;
-
-  svg {
-    width: 1em;
-    height: 1em;
-  }
-}
-</style>
+<style scoped lang="scss"></style>
