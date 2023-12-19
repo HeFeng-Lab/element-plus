@@ -5,15 +5,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import { iconProps } from "./icon"
-import { createNamespace } from "@code-lab/element-plus-utils"
+import { computed } from 'vue'
+import { iconProps } from './icon'
+import { createNamespace } from '@code-lab/element-plus-utils'
 
 defineOptions({
-  name: "ELIcon",
+  name: 'ELIcon'
 })
 
-const ns = createNamespace("icon")
+const ns = createNamespace('icon')
 const props = defineProps(iconProps)
 
 const styles = computed(() => {
@@ -22,8 +22,8 @@ const styles = computed(() => {
   if (!size && !color) return {}
 
   return {
-    ...(size ? { "font-size": `${size}px` } : {}),
-    ...(color ? { color } : {}),
+    ...(size ? { 'font-size': `${size}px` } : {}),
+    ...(color ? { color } : {})
   }
 })
 </script>

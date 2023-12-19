@@ -1,2 +1,2 @@
-export * from "./create"
-export * from "./withInstall"
+export * from './create'
+export * from './withInstall'

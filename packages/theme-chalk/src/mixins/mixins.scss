@@ -1,11 +1,11 @@
 // 仅仅使用一次，私有变量不被引用
-@use "config" as *;
+@use 'config' as *;
 
 // 将 config 的变量继续导出
-@forward "config";
+@forward 'config';
 
 @mixin b($block) {
-  $B: $namespace + "-" + $block;
+  $B: $namespace + '-' + $block;
   .#{$B} {
     @content;
   }
