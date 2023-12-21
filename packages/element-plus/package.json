@@ -1,0 +1,14 @@
+{
+  "name": "@code-lab/element-plus",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "types": "types/index.d.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@code-lab/components": "workspace:^"
+  }
+}
