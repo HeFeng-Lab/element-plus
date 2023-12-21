@@ -3,8 +3,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm -C play dev",
+    "play:dev": "pnpm -C play dev",
     "docs:dev": "pnpm -C docs docs:dev",
+    "docs:build": "pnpm -C docs docs:build",
     "prepare": "husky install",
     "format": "prettier --write ."
   },

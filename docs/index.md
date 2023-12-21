@@ -4,11 +4,11 @@ layout: home
 
 hero:
   name: 'Element plus'
-  text: 'Custom Element Plus UI Components'
+  text: '自定义一个 Element Plus 组件库'
   tagline: My great project tagline
   actions:
     - theme: brand
-      text: Markdown Examples
+      text: Get Started
       link: /markdown-examples
     - theme: alt
       text: API Examples

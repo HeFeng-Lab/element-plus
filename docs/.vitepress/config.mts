@@ -18,6 +18,13 @@ export default defineConfig({
           { text: 'Markdown Examples', link: '/markdown-examples' },
           { text: 'Runtime API Examples', link: '/api-examples' }
         ]
+      },
+      {
+        text: 'Components',
+        items: [
+          { text: 'Icon', link: '/components/icon' },
+          { text: 'Button', link: '/components/button' }
+        ]
       }
     ],
 
