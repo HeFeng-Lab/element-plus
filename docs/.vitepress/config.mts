@@ -2,6 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/element-plus/',
+
   title: 'Element Plus',
   description: 'Custom Element Plus UI Components',
   themeConfig: {
