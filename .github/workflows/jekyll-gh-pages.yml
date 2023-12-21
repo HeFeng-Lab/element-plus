@@ -32,8 +32,8 @@ jobs:
         uses: actions/configure-pages@v4
       - name: yarn install, build
         run: |
-          pnpm
-          pnpm build：docs
+          yarn install
+          yarn build：docs
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
