@@ -83,6 +83,12 @@ importers:
         specifier: workspace:^
         version: link:../utils
 
+  packages/element-plus:
+    dependencies:
+      '@code-lab/components':
+        specifier: workspace:^
+        version: link:../components
+
   packages/theme-chalk: {}
 
   packages/utils: {}
@@ -92,6 +98,9 @@ importers:
       '@code-lab/components':
         specifier: workspace:^
         version: link:../packages/components
+      '@code-lab/element-plus':
+        specifier: workspace:^
+        version: link:../packages/element-plus
       '@code-lab/theme-chalk':
         specifier: workspace:^
         version: link:../packages/theme-chalk

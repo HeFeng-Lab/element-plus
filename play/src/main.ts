@@ -1,13 +1,11 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
 
+import ElementPlus from '@code-lab/element-plus'
 import '@code-lab/theme-chalk/src/index.scss'
-
-import { ELIcon } from '@code-lab/components'
 
 const app = createApp(App)
 
-app.use(ELIcon)
+app.use(ElementPlus)
 
 app.mount('#app')

@@ -10,7 +10,7 @@ import { iconProps } from './icon'
 import { createNamespace } from '@code-lab/element-plus-utils'
 
 defineOptions({
-  name: 'ELIcon'
+  name: 'ElIcon'
 })
 
 const ns = createNamespace('icon')

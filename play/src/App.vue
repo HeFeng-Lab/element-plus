@@ -3,12 +3,25 @@ import { Edit } from '@element-plus/icons-vue'
 </script>
 
 <template>
-  <ELIcon :size="20" color="red">
+  <ElIcon :size="20" color="red">
     <Edit />
-  </ELIcon>
-  <ELIcon :size="20" color="blue">
+  </ElIcon>
+  <ElIcon :size="20" color="blue">
     <Edit />
-  </ELIcon>
+  </ElIcon>
+
+  <ElButton
+    type="primary"
+    size="large"
+    plain
+    :disabled="true"
+    :loading="false"
+    :round="true"
+    :native-type="'submit'"
+    :text="true"
+  >
+    Button
+  </ElButton>
 </template>
 
 <style scoped></style>
