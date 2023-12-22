@@ -10,31 +10,7 @@ pnpm install @element-plus/icons-vue
 
 - 如果你想像用例一样直接使用，你需要全局注册组件，才能够直接在项目里使用。
 
-<script setup lang="ts">
-import { Edit } from '@element-plus/icons-vue'
-</script>
-
-<ElIcon :size="20" color="red">
-  <Edit />
-</ElIcon>
-<ElIcon :size="20" color="blue">
-  <Edit />
-</ElIcon>
-
-```vue
-<script setup lang="ts">
-import { Edit } from '@element-plus/icons-vue'
-</script>
-
-<template>
-  <ELIcon :size="20" color="red">
-    <Edit />
-  </ELIcon>
-  <ELIcon :size="20" color="blue">
-    <Edit />
-  </ELIcon>
-</template>
-```
+<preview path="./Icon.vue"></preview>
 
 ## API
 

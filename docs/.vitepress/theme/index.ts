@@ -3,11 +3,12 @@ import DefaultTheme from 'vitepress/theme'
 import ElementPlus from '@code-lab/element-plus'
 import '@code-lab/theme-chalk/src/index.scss'
 
-// .vitepress/theme/index.js
-
-// You can directly import Vue files in the theme entry
-// VitePress is pre-configured with @vitejs/plugin-vue.
-// import Layout from './Layout.vue'
+import {
+  AntDesignContainer,
+  ElementPlusContainer,
+  NaiveUIContainer
+} from '@vitepress-demo-preview/component'
+import '@vitepress-demo-preview/component/dist/style.css'
 
 export default {
   // Layout,
@@ -15,5 +16,6 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // ...
     app.use(ElementPlus) // 注册组件
+    app.component('demo-preview', AntDesignContainer)
   }
 }

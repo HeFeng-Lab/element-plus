@@ -1,15 +1,4 @@
-<script setup lang="ts">
-import { Edit } from '@element-plus/icons-vue'
-</script>
-
 <template>
-  <ElIcon :size="20" color="red">
-    <Edit />
-  </ElIcon>
-  <ElIcon :size="20" color="blue">
-    <Edit />
-  </ElIcon>
-
   <el-button>Default</el-button>
   <el-button type="primary">Primary</el-button>
   <el-button type="success">Success</el-button>
@@ -17,5 +6,3 @@ import { Edit } from '@element-plus/icons-vue'
   <el-button type="warning">Warning</el-button>
   <el-button type="danger">Danger</el-button>
 </template>
-
-<style scoped></style>

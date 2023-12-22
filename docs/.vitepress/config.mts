@@ -1,4 +1,8 @@
 import { defineConfig } from 'vitepress'
+import {
+  containerPreview,
+  componentPreview
+} from '@vitepress-demo-preview/plugin'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -24,8 +28,8 @@ export default defineConfig({
       {
         text: 'Components',
         items: [
-          { text: 'Icon', link: '/components/icon' },
-          { text: 'Button', link: '/components/button' }
+          { text: 'Icon', link: '/components/icon/index' },
+          { text: 'Button', link: '/components/button/index' }
         ]
       }
     ],
@@ -33,5 +37,15 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ]
+  },
+  markdown: {
+    theme: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark'
+    },
+    config(md) {
+      md.use(componentPreview)
+      md.use(containerPreview)
+    }
   }
 })
