@@ -35,8 +35,10 @@
   }
 }
 
-@mixin button-variant($color, $background-color, $border-color) {
-  color: $color;
-  background: $background-color;
-  border-color: $border-color;
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
 }

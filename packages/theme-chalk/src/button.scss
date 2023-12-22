@@ -1,63 +1,107 @@
-@use 'mixins/mixins' as *;
+@use 'sass:map';
+
 @use 'common/var' as *;
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'mixins/function' as *;
+@use 'mixins/button' as *;
+
+$button-icon-span-gap: () !default;
+$button-icon-span-gap: map.merge(
+  (
+    'large': 8px,
+    'default': 6px,
+    'small': 4px
+  ),
+  $button-icon-span-gap
+);
 
 @include b(button) {
-  // BEM规范
-  align-items: center;
+  @include set-component-css-var('button', $button);
+}
+
+@include b(button) {
   display: inline-flex;
-  cursor: pointer;
-  outline: none;
-  border: #fafafa;
-  border-radius: 5px;
-  user-select: none;
-  min-height: 40px;
+  justify-content: center;
+  align-items: center;
+
   line-height: 1;
+  // min-height will expand when in flex
+  height: map.get($input-height, 'default');
+  white-space: nowrap;
+  cursor: pointer;
+  color: getCssVar('button', 'text-color');
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: 0.1s;
+  font-weight: getCssVar('button', 'font-weight');
+  user-select: none;
   vertical-align: middle;
-  padding: 0 20px;
+  -webkit-appearance: none;
+  background-color: getCssVar('button', 'bg-color');
+  border: getCssVar('border');
+  border-color: getCssVar('button', 'border-color');
 
-  @include m(medium) {
-    padding: 0 20px;
+  &:hover,
+  &:focus {
+    color: getCssVar('button', 'hover', 'text-color');
+    border-color: getCssVar('button', 'hover', 'border-color');
+    background-color: getCssVar('button', 'hover', 'bg-color');
+    outline: none;
   }
 
-  @include m(small) {
-    padding: 0 18px;
+  &:active {
+    color: getCssVar('button', 'active', 'text-color');
+    border-color: getCssVar('button', 'active', 'border-color');
+    background-color: getCssVar('button', 'active', 'bg-color');
+    outline: none;
   }
 
-  @include m(large) {
-    padding: 0 25px;
+  &:focus-visible {
+    outline: 2px solid getCssVar('button', 'outline-color');
+    outline-offset: 1px;
   }
 
-  @include when(disabled) {
-    // 针对不同类型处理
-    &,
-    &:hover,
-    &:focus {
-      cursor: not-allowed;
+  > span {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  & + & {
+    margin-left: 12px;
+  }
+
+  @include button-size(
+    map.get($button-padding-vertical, 'default') - $button-border-width,
+    map.get($button-padding-horizontal, 'default') - $button-border-width,
+    map.get($button-font-size, 'default'),
+    map.get($button-border-radius, 'default')
+  );
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  & [class*='#{$namespace}-icon'] {
+    & + span {
+      margin-left: map.get($button-icon-span-gap, 'default');
+    }
+    svg {
+      vertical-align: bottom;
     }
   }
 
-  @include when(round) {
-    border-radius: 20px;
+  @each $type in (primary, success, warning, danger, info) {
+    @include m($type) {
+      @include button-variant($type);
+    }
   }
 
-  @include m(primary) {
-    //渲染不同类型的button
-    @include button-variant($color-white, $color-primary, $color-primary);
-  }
-
-  @include m(success) {
-    @include button-variant($color-white, $color-success, $color-success);
-  }
-
-  @include m(warning) {
-    @include button-variant($color-white, $color-warning, $color-warning);
-  }
-
-  @include m(danger) {
-    @include button-variant($color-white, $color-danger, $color-danger);
-  }
-
-  @include m(info) {
-    @include button-variant($color-white, $color-info, $color-info);
+  @include when(active) {
+    color: getCssVar('button', 'active', 'text-color');
+    border-color: getCssVar('button', 'active', 'border-color');
+    background-color: getCssVar('button', 'active', 'bg-color');
+    outline: none;
   }
 }
