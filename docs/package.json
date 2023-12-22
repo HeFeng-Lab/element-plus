@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@code-lab/components": "workspace:^",
+    "@code-lab/element-plus": "workspace:^",
     "@code-lab/theme-chalk": "workspace:^",
     "@element-plus/icons-vue": "^2.3.1",
     "vitepress": "1.0.0-rc.32"

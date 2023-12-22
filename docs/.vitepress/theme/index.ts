@@ -1,7 +1,8 @@
 import DefaultTheme from 'vitepress/theme'
+
+import ElementPlus from '@code-lab/element-plus'
 import '@code-lab/theme-chalk/src/index.scss'
 
-import { ELIcon } from '@code-lab/components'
 // .vitepress/theme/index.js
 
 // You can directly import Vue files in the theme entry
@@ -13,6 +14,6 @@ export default {
   ...DefaultTheme,
   enhanceApp({ app, router, siteData }) {
     // ...
-    app.use(ELIcon) // 注册组件
+    app.use(ElementPlus) // 注册组件
   }
 }
