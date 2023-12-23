@@ -1,4 +1,6 @@
-@use 'var' as *;
+@use '../mixins/var' as *;
+@use '../mixins/function' as *;
+@use '../common/var' as *;
 
 @mixin button-plain($type) {
   $button-color-types: (

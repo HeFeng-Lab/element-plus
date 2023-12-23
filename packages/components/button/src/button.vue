@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createNamespace } from '../../../utils'
+import { createNamespace } from '@code-lab/element-plus-utils/create'
 import { buttonEmits, buttonProps } from './button'
 
 defineOptions({

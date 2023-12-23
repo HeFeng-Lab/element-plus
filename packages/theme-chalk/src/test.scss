@@ -1,0 +1,9 @@
+@use 'mixins/mixins' as *;
+
+@include b(button) {
+  font-size: 16px;
+
+  @include when(disabled) {
+    display: disabled;
+  }
+}

@@ -30,6 +30,9 @@
       getCssVar('border-color')
   );
 
+  // Disable base
+  @include set-component-css-var('disabled', $disabled);
+
   // --el-text-color-#{$type}
   @include set-component-css-var('text-color', $text-color);
 

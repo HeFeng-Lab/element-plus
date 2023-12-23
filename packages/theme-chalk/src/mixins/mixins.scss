@@ -1,35 +1,63 @@
-// 仅仅使用一次，私有变量不被引用
+@use 'function' as *;
+@use '../common/var' as *;
+// forward mixins
+@forward 'config';
+@forward 'function';
+@forward '_var';
 @use 'config' as *;
 
-// 将 config 的变量继续导出
-@forward 'config';
-
+// BEM
 @mixin b($block) {
-  $B: $namespace + '-' + $block;
+  $B: $namespace + $common-separator + $block !global;
+
   .#{$B} {
     @content;
   }
 }
 
-@mixin when($state) {
-  @at-root {
-    &.#{$state-prefix + $state} {
-      @content;
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: '';
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector +
+      '.' +
+      $B +
+      $element-separator +
+      $unit +
+      ','};
+  }
+
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$currentSelector} {
+        @content;
+      }
     }
   }
 }
 
 @mixin m($modifier) {
-  @at-root {
-    #{& + $modifier-separator + $modifier} {
-      @content;
-    }
+  $selector: &;
+  $currentSelector: '';
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector +
+      $selector +
+      $modifier-separator +
+      $unit +
+      ','};
   }
-}
 
-@mixin e($element) {
   @at-root {
-    #{& + $element-separator + $element} {
+    #{$currentSelector} {
       @content;
     }
   }
