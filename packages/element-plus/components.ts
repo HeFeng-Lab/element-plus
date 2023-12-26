@@ -1,4 +1,4 @@
 import { Plugin } from 'vue'
-import { ElIcon, ElButton } from '@code-lab/components'
+import { ElIcon, ElButton, ElTree } from '@code-lab/components'
 
-export default [ElIcon, ElButton] as Plugin[]
+export default [ElIcon, ElButton, ElTree] as Plugin[]
