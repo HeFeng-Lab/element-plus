@@ -1,5 +1,5 @@
 import { ExtractPropTypes, PropType } from 'vue'
-import { TreeOption } from './tree'
+import { Key, TreeOption } from './tree'
 
 export interface TreeNode extends Required<TreeOption> {
   level: number
@@ -14,6 +14,10 @@ export const treeNodeProps = {
   expanded: {
     type: Boolean,
     default: false
+  },
+  loadingKeys: {
+    type: Object as PropType<Set<Key>>,
+    required: true
   }
 } as const
 

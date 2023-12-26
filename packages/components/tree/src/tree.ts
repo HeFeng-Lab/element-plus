@@ -7,6 +7,7 @@ export interface TreeOption {
   label?: string
   isLeaf?: boolean
   children?: TreeOption[]
+
   [key: string]: unknown
 }
 
@@ -30,6 +31,12 @@ export const treeProps = {
   keyField: {
     type: String,
     default: 'key'
+  },
+  onLoad: {
+    type: Function as PropType<(node: TreeOption) => Promise<TreeOption[]>>
+  },
+  loadingKeys: {
+    type: Object as PropType<Set<Key>>
   }
 } as const
 

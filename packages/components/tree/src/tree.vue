@@ -82,6 +82,8 @@ function createTree(
 
 const expandedKeySet = ref(new Set(props.defaultExpandedKeys))
 
+const loadingKeysRef = ref(new Set<Key>())
+
 // 根据 defaultExpandedKeys值，将树状数据格式化为扁平化数组
 const flattenData = computed(() => {
   const expandedKeys = expandedKeySet.value
@@ -122,14 +124,37 @@ function collapse(node: TreeNode) {
 function expand(node: TreeNode) {
   const keySet = expandedKeySet.value
   keySet.add(node.key)
+
+  triggerLoading(node)
 }
 
 const toggleExpand = (node: TreeNode) => {
   const expandedKeys = expandedKeySet.value
-  if (expandedKeys.has(node.key)) {
+  // 收起条件：在展开的集合中，并且不在正在加载的集合中
+  if (expandedKeys.has(node.key) && !loadingKeysRef.value.has(node.key)) {
     collapse(node)
   } else {
     expand(node)
+  }
+}
+
+function triggerLoading(node) {
+  if (!node.children.length && !node.isLeaf) {
+    // 需要异步加载
+    const loadingKeys = loadingKeysRef.value
+    const { onLoad } = props // 有onLoad方法
+    if (!loadingKeys.has(node.key)) {
+      // 防止重复加载
+      loadingKeys.add(node.key) // 添加为正在加载
+      if (onLoad) {
+        // 调用用户提供的加载方法
+        props.onLoad!(node.rawNode).then((children: TreeOption[]) => {
+          node.rawNode.children = children
+          node.children = createTree(children, node) // 格式化后绑定children属性
+          loadingKeys.delete(node.key) // 加载完毕移除key
+        })
+      }
+    }
   }
 }
 </script>
@@ -142,6 +167,7 @@ const toggleExpand = (node: TreeNode) => {
       class=""
       :node="node"
       :expanded="false"
+      :loading-keys="loadingKeysRef"
       @toggle="toggleExpand"
     >
     </ElTreeNode>

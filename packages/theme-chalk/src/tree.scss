@@ -12,11 +12,16 @@
   &:hover {
     background-color: #f5f7fa;
   }
-  @include e(expand-icon) {
+
+  .el-icon {
+    margin-right: 6px;
+  }
+  @include e('expand-icon') {
     display: inline-block;
-    cursor: pointer;
+    vertical-align: middle;
     transform: rotate(0deg);
-    transition: transform 0.1s ease-in-out;
+    transition: transform 0.2s ease-in;
+    cursor: pointer;
     &.expanded {
       transform: rotate(90deg);
     }
@@ -24,5 +29,35 @@
       fill: transparent;
       cursor: default;
     }
+  }
+  @keyframes rotate {
+    0% {
+      transform: rotate(0);
+    }
+
+    25% {
+      transform: rotate(90deg);
+    }
+
+    50% {
+      transform: rotate(180deg);
+    }
+
+    75% {
+      transform: rotate(270deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @include e('icon-loading') {
+    animation: rotate 1s linear infinite;
+  }
+  @include when(selected) {
+    background-color: aqua;
+  }
+  @include e('content') {
+    display: flex;
   }
 }
