@@ -17,4 +17,10 @@ export const treeNodeProps = {
   }
 } as const
 
+export const treeNodeEmits = {
+  toggle: (node: TreeNode) => node
+}
+
 export type TreeNodeProps = Partial<ExtractPropTypes<typeof treeNodeProps>>
+
+export type ButtonEmits = typeof treeNodeEmits

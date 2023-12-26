@@ -32,6 +32,7 @@ function createTreeOptions(
     }
   }
 }
+
 const treeOptions = createTreeOptions(
   props.keyField,
   props.childrenField,
@@ -113,6 +114,24 @@ const flattenData = computed(() => {
   }
   return flattenNodes
 })
+
+function collapse(node: TreeNode) {
+  expandedKeySet.value.delete(node.key)
+}
+
+function expand(node: TreeNode) {
+  const keySet = expandedKeySet.value
+  keySet.add(node.key)
+}
+
+const toggleExpand = (node: TreeNode) => {
+  const expandedKeys = expandedKeySet.value
+  if (expandedKeys.has(node.key)) {
+    collapse(node)
+  } else {
+    expand(node)
+  }
+}
 </script>
 
 <template>
@@ -123,7 +142,9 @@ const flattenData = computed(() => {
       class=""
       :node="node"
       :expanded="false"
-    ></ElTreeNode>
+      @toggle="toggleExpand"
+    >
+    </ElTreeNode>
   </div>
 </template>
 
