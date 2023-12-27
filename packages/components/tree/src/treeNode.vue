@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { createNamespace } from '@code-lab/element-plus-utils'
-import { computed } from 'vue'
+import {createNamespace} from '@code-lab/element-plus-utils'
+import {computed} from 'vue'
 import CaretRight from '../../caretRight/caretRight'
 import Loading from '../../loading/loading'
-import { TreeNode, treeNodeEmits, treeNodeProps } from './treeNode'
+import {TreeNode, treeNodeEmits, treeNodeProps} from './treeNode'
 import Tree from "../index";
 
 defineOptions({
@@ -27,11 +27,15 @@ const isLoading = computed(() => {
 const handlerClickContent = (node: TreeNode) => {
   emits("select", node)
 }
+
+const isSelected = computed(() => {
+  return props.selectedKeys.includes(props.node!.key)
+})
 </script>
 
 <template>
   <div
-    :class="[ns.b()]"
+    :class="[ns.b(), ns.is('selected', isSelected)]"
     :style="{ paddingLeft: `${props.node!.level * 16 + 'px'}` }"
   >
     <div :class="[ns.e('content')]">

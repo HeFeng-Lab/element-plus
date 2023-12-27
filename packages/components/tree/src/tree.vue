@@ -192,10 +192,10 @@ function handlerSelect(node: TreeNode) {
     <ElTreeNode
       v-for="node in flattenData"
       :key="node.key"
-      class=""
       :node="node"
       :expanded="false"
       :loading-keys="loadingKeysRef"
+      :selected-keys="selectedKeys"
       @toggle="toggleExpand"
       @select="handlerSelect"
     >
