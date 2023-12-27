@@ -1,10 +1,11 @@
-import {ExtractPropTypes, PropType} from 'vue'
-import {Key, TreeOption} from './tree'
+import { ExtractPropTypes, PropType } from 'vue'
+import { Key, TreeOption } from './tree'
 
 export interface TreeNode extends Required<TreeOption> {
   level: number
   children: TreeNode[]
   rawNode: TreeOption
+  disabled: boolean
 }
 
 export const treeNodeProps = {

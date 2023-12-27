@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { createNamespace } from '@code-lab/element-plus-utils'
 import { computed, ref, watch } from 'vue'
-import {Key, treeEvents, TreeOption, treeProps} from './tree'
+import { Key, treeEvents, TreeOption, treeProps } from './tree'
 import type { TreeNode } from './treeNode'
 import ElTreeNode from './treeNode.vue'
 
@@ -66,7 +66,8 @@ function createTree(
         level: parent ? parent.level + 1 : 0,
         isLeaf: node.isLeaf ?? childrenLen == 0,
         children: [],
-        rawNode: node
+        rawNode: node,
+        disabled: !!node.disabled
       }
 
       if (childrenLen > 0) {
@@ -163,27 +164,26 @@ function triggerLoading(node) {
 const selectedKeys = ref<Key[]>([])
 
 function handlerSelect(node: TreeNode) {
-  if(!props.selectable) {
+  if (!props.selectable) {
     return
   }
 
-  if(props.multiple) {
+  if (props.multiple) {
     const index = selectedKeys.value.findIndex((key: Key) => key === node.key)
-    if(index > -1) {
+    if (index > -1) {
       selectedKeys.value.splice(index, 1)
-
     } else {
       selectedKeys.value.push(node.key)
     }
   } else {
-    if(selectedKeys.value.includes(node.key)) {
+    if (selectedKeys.value.includes(node.key)) {
       selectedKeys.value = []
     } else {
       selectedKeys.value = [node.key]
     }
   }
 
-  emits("update:modelValue", selectedKeys.value)
+  emits('update:modelValue', selectedKeys.value)
 }
 </script>
 

@@ -25,17 +25,27 @@ const isLoading = computed(() => {
 })
 
 const handlerClickContent = (node: TreeNode) => {
+  if (node.disabled) return
+
   emits('select', node)
 }
 
 const isSelected = computed(() => {
   return props.selectedKeys.includes(props.node!.key)
 })
+
+const isDisabled = computed(() => {
+  return props.node!.disabled
+})
 </script>
 
 <template>
   <div
-    :class="[ns.b(), ns.is('selected', isSelected)]"
+    :class="[
+      ns.b(),
+      ns.is('selected', isSelected),
+      ns.is('disabled', isDisabled)
+    ]"
     :style="{ paddingLeft: `${props.node!.level * 16 + 'px'}` }"
   >
     <div :class="[ns.e('content')]">
