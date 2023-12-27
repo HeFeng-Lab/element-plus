@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 // import { Edit } from '@element-plus/icons-vue'
 import { TreeOption } from '@code-lab/components/tree/src/tree'
 
@@ -71,6 +71,14 @@ const handleLoad = (node: TreeOption) => {
     }, 300)
   })
 }
+
+const treeValue = ref([])
+
+watch(() => treeValue.value, (val) => {
+  console.log("tree 选择变化", val)
+}, {
+  deep: true,
+})
 </script>
 
 <template>
@@ -89,7 +97,7 @@ const handleLoad = (node: TreeOption) => {
   <el-button type="danger">Danger</el-button> -->
 
   <!--  <el-tree :data="treeData" :default-expanded-keys="['40', '41']"></el-tree>-->
-  <el-tree :data="treeData2" :on-load="handleLoad"></el-tree>
+  <el-tree v-model="treeValue" :data="treeData2" :on-load="handleLoad" :selectable="true" :multiple="true"></el-tree>
 </template>
 
 <style scoped></style>

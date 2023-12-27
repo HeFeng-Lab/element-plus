@@ -18,11 +18,12 @@ export const treeNodeProps = {
   loadingKeys: {
     type: Object as PropType<Set<Key>>,
     required: true
-  }
+  },
 } as const
 
 export const treeNodeEmits = {
-  toggle: (node: TreeNode) => node
+  toggle: (node: TreeNode) => node,
+  select: (node: TreeNode) => node
 }
 
 export type TreeNodeProps = Partial<ExtractPropTypes<typeof treeNodeProps>>

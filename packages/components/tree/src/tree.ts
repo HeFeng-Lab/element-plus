@@ -12,6 +12,10 @@ export interface TreeOption {
 }
 
 export const treeProps = {
+  modelValue: {
+    type: Array as PropType<Key[]>,
+    default: () => []
+  },
   data: {
     type: Object as PropType<TreeOption[]>,
     default: () => []
@@ -35,9 +39,17 @@ export const treeProps = {
   onLoad: {
     type: Function as PropType<(node: TreeOption) => Promise<TreeOption[]>>
   },
-  loadingKeys: {
-    type: Object as PropType<Set<Key>>
+  selectable: {
+    type: Boolean,
+    default: false
+  },
+  multiple: {
+    type: Boolean,
   }
 } as const
 
 export type TreeProps = ExtractPropTypes<typeof treeProps>
+
+export const treeEvents = {
+  "update:modelValue": (keys: Key[]) => keys
+}

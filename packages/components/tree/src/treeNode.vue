@@ -4,6 +4,7 @@ import { computed } from 'vue'
 import CaretRight from '../../caretRight/caretRight'
 import Loading from '../../loading/loading'
 import { TreeNode, treeNodeEmits, treeNodeProps } from './treeNode'
+import Tree from "../index";
 
 defineOptions({
   name: 'ElTreeNode'
@@ -22,6 +23,10 @@ const handlerExpandIconClick = (node: TreeNode) => {
 const isLoading = computed(() => {
   return props.loadingKeys?.has(props.node!.key)
 })
+
+const handlerClickContent = (node: TreeNode) => {
+  emits("select", node)
+}
 </script>
 
 <template>
@@ -43,7 +48,7 @@ const isLoading = computed(() => {
           <Loading v-else></Loading>
         </el-icon>
       </span>
-      <span>{{ props.node!.label }}</span>
+      <span @click="handlerClickContent(node)">{{ props.node!.label }}</span>
     </div>
   </div>
 </template>
