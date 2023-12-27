@@ -4,7 +4,7 @@ import { computed } from 'vue'
 import CaretRight from '../../caretRight/caretRight'
 import Loading from '../../loading/loading'
 import { TreeNode, treeNodeEmits, treeNodeProps } from './treeNode'
-import Tree from '../index'
+import ElTreeNodeContent from './tree-node-content'
 
 defineOptions({
   name: 'ElTreeNode'
@@ -63,7 +63,7 @@ const isDisabled = computed(() => {
         </el-icon>
       </span>
       <span :class="[ns.e('label')]" @click="handlerClickContent(props.node!)">
-        {{ props.node!.label }}
+        <ElTreeNodeContent :node="node"></ElTreeNodeContent>
       </span>
     </div>
   </div>

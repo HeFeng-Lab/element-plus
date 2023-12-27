@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { createNamespace } from '@code-lab/element-plus-utils'
-import { computed, ref, watch } from 'vue'
-import { Key, treeEvents, TreeOption, treeProps } from './tree'
+import { computed, ref, watch, provide, useSlots } from 'vue'
+import {
+  Key,
+  treeEvents,
+  treeInjectionKey,
+  TreeOption,
+  treeProps
+} from './tree'
 import type { TreeNode } from './treeNode'
 import ElTreeNode from './treeNode.vue'
 
@@ -12,6 +18,10 @@ defineOptions({
 const props = defineProps(treeProps)
 
 const emits = defineEmits(treeEvents)
+
+provide(treeInjectionKey, {
+  slots: useSlots() // 提供slots属性
+})
 
 const ns = createNamespace('tree')
 

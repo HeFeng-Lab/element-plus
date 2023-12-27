@@ -1,4 +1,5 @@
-import { ExtractPropTypes, PropType } from 'vue'
+import { ExtractPropTypes, InjectionKey, PropType, SetupContext } from 'vue'
+import { TreeNode } from './treeNode'
 
 export type Key = string | number
 
@@ -44,12 +45,25 @@ export const treeProps = {
     default: false
   },
   multiple: {
-    type: Boolean,
+    type: Boolean
   }
 } as const
 
 export type TreeProps = ExtractPropTypes<typeof treeProps>
 
 export const treeEvents = {
-  "update:modelValue": (keys: Key[]) => keys
+  'update:modelValue': (keys: Key[]) => keys
 }
+
+export interface TreeContext {
+  slots: SetupContext['slots']
+}
+
+export const treeInjectionKey: InjectionKey<TreeContext> = Symbol()
+
+export const treeNodeContentProps = {
+  node: {
+    type: Object as PropType<TreeNode>,
+    required: true
+  }
+} as const

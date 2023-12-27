@@ -135,7 +135,11 @@ const treeValue3 = ref<TreeOption[]>([
     :on-load="handleLoad"
     :selectable="true"
     :multiple="true"
-  ></el-tree>
+  >
+    <template #default="{ node }">
+      template {{ node.key }} - {{ node.label }}</template
+    >
+  </el-tree>
 </template>
 
 <style scoped></style>
