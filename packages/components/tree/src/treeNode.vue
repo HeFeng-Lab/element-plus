@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {createNamespace} from '@code-lab/element-plus-utils'
-import {computed} from 'vue'
+import { createNamespace } from '@code-lab/element-plus-utils'
+import { computed } from 'vue'
 import CaretRight from '../../caretRight/caretRight'
 import Loading from '../../loading/loading'
-import {TreeNode, treeNodeEmits, treeNodeProps} from './treeNode'
-import Tree from "../index";
+import { TreeNode, treeNodeEmits, treeNodeProps } from './treeNode'
+import Tree from '../index'
 
 defineOptions({
   name: 'ElTreeNode'
@@ -25,7 +25,7 @@ const isLoading = computed(() => {
 })
 
 const handlerClickContent = (node: TreeNode) => {
-  emits("select", node)
+  emits('select', node)
 }
 
 const isSelected = computed(() => {
@@ -52,7 +52,9 @@ const isSelected = computed(() => {
           <Loading v-else></Loading>
         </el-icon>
       </span>
-      <span @click="handlerClickContent(node)">{{ props.node!.label }}</span>
+      <span :class="[ns.e('label')]" @click="handlerClickContent(props.node!)">
+        {{ props.node!.label }}
+      </span>
     </div>
   </div>
 </template>
