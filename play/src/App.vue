@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 // import { Edit } from '@element-plus/icons-vue'
+import { ElCheckbox } from '@code-lab/components'
 import { TreeOption } from '@code-lab/components/tree/src/tree'
 
 const treeData = ref()
@@ -111,6 +112,12 @@ const treeValue3 = ref<TreeOption[]>([
     ]
   }
 ])
+
+const checkStatus = ref(false)
+
+const handlerCheckboxChange = (val: string | number | boolean) => {
+  console.log(val)
+}
 </script>
 
 <template>
@@ -137,9 +144,21 @@ const treeValue3 = ref<TreeOption[]>([
     :multiple="true"
   >
     <template #default="{ node }">
-      template {{ node.key }} - {{ node.label }}</template
-    >
+      template {{ node.key }} - {{ node.label }}
+    </template>
   </el-tree>
+
+  <hr />
+
+  <ElCheckbox
+    v-model="checkStatus"
+    label="checkbox"
+    true-label="TrueLabel"
+    false-label="FalseLabel"
+    @change="handlerCheckboxChange"
+  >
+    test
+  </ElCheckbox>
 </template>
 
 <style scoped></style>

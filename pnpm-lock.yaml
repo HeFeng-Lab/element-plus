@@ -103,7 +103,11 @@ importers:
 
   packages/theme-chalk: {}
 
-  packages/utils: {}
+  packages/utils:
+    dependencies:
+      '@vue/shared':
+        specifier: ^3.4.5
+        version: 3.4.5
 
   play:
     dependencies:
@@ -1608,6 +1612,10 @@ packages:
 
   /@vue/shared@3.3.12:
     resolution: {integrity: sha512-6p0Yin0pclvnER7BLNOQuod9Z+cxSYh8pSh7CzHnWNjAIP6zrTlCdHRvSCb1aYEx6i3Q3kvfuWU7nG16CgG1ag==}
+
+  /@vue/shared@3.4.5:
+    resolution: {integrity: sha512-6XptuzlMvN4l4cDnDw36pdGEV+9njYkQ1ZE0Q6iZLwrKefKaOJyiFmcP3/KBDHbt72cJZGtllAc1GaHe6XGAyg==}
+    dev: false
 
   /@vueuse/core@10.7.0(vue@3.3.12):
     resolution: {integrity: sha512-4EUDESCHtwu44ZWK3Gc/hZUVhVo/ysvdtwocB5vcauSV4B7NiGY5972WnsojB3vRNdxvAt7kzJWE2h9h7C9d5w==}

@@ -31,7 +31,9 @@ module.exports = {
     'vue/html-self-closing': 'off',
     'vue/max-attributes-per-line': 'off',
     'vue/singleline-html-element-content-newline': 'off',
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'vue/prefer-import-from-vue': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   globals: {
     defineProps: 'readonly'
