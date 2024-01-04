@@ -1,8 +1,8 @@
-import { defineConfig } from 'vitepress'
 import {
-  containerPreview,
-  componentPreview
+  componentPreview,
+  containerPreview
 } from '@vitepress-demo-preview/plugin'
+import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -29,7 +29,8 @@ export default defineConfig({
         text: 'Components',
         items: [
           { text: 'Icon', link: '/components/icon/index' },
-          { text: 'Button', link: '/components/button/index' }
+          { text: 'Button', link: '/components/button/index' },
+          { text: 'Checkbox', link: '/components/checkbox/index' }
         ]
       }
     ],
