@@ -1,4 +1,5 @@
 import { ExtractPropTypes, PropType } from 'vue'
+import { CheckboxValueType } from '../../checkbox'
 import { Key, TreeOption } from './tree'
 
 export interface TreeNode extends Required<TreeOption> {
@@ -6,6 +7,7 @@ export interface TreeNode extends Required<TreeOption> {
   children: TreeNode[]
   rawNode: TreeOption
   disabled: boolean
+  parentKey?: Key
 }
 
 export const treeNodeProps = {
@@ -23,12 +25,29 @@ export const treeNodeProps = {
   selectedKeys: {
     type: Array as PropType<Key[]>,
     default: () => []
+  },
+  checkable: {
+    type: Boolean,
+    default: false
+  },
+  indeterminate: {
+    type: Boolean,
+    default: false
+  },
+  checked: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 } as const
 
 export const treeNodeEmits = {
   toggle: (node: TreeNode) => node,
-  select: (node: TreeNode) => node
+  select: (node: TreeNode) => node,
+  check: (node: TreeNode, val: CheckboxValueType) => typeof val === 'boolean'
 }
 
 export type TreeNodeProps = Partial<ExtractPropTypes<typeof treeNodeProps>>

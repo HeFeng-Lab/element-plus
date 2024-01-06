@@ -2,9 +2,10 @@
 import { createNamespace } from '@code-lab/element-plus-utils'
 import { computed } from 'vue'
 import CaretRight from '../../caretRight/caretRight'
+import ElCheckbox, { CheckboxValueType } from '../../checkbox/index'
 import Loading from '../../loading/loading'
-import { TreeNode, treeNodeEmits, treeNodeProps } from './treeNode'
 import ElTreeNodeContent from './tree-node-content'
+import { TreeNode, treeNodeEmits, treeNodeProps } from './treeNode'
 
 defineOptions({
   name: 'ElTreeNode'
@@ -37,6 +38,10 @@ const isSelected = computed(() => {
 const isDisabled = computed(() => {
   return props.node!.disabled
 })
+
+const handlerCheckboxChange = (val: CheckboxValueType) => {
+  emits('check', props.node!, val)
+}
 </script>
 
 <template>
@@ -62,8 +67,16 @@ const isDisabled = computed(() => {
           <Loading v-else></Loading>
         </el-icon>
       </span>
+      <span>
+        <ElCheckbox
+          :indeterminate="props.indeterminate"
+          :disabled="props.disabled"
+          :model-value="props.checked"
+          @change="handlerCheckboxChange"
+        ></ElCheckbox>
+      </span>
       <span :class="[ns.e('label')]" @click="handlerClickContent(props.node!)">
-        <ElTreeNodeContent :node="node"></ElTreeNodeContent>
+        <ElTreeNodeContent :node="node!"></ElTreeNodeContent>
       </span>
     </div>
   </div>

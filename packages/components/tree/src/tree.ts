@@ -21,6 +21,10 @@ export const treeProps = {
     type: Object as PropType<TreeOption[]>,
     default: () => []
   },
+  defaultCheckedKeys: {
+    type: Array as PropType<Key[]>,
+    default: () => []
+  },
   defaultExpandedKeys: {
     type: Array as PropType<Key[]>,
     default: () => []
@@ -40,7 +44,13 @@ export const treeProps = {
   onLoad: {
     type: Function as PropType<(node: TreeOption) => Promise<TreeOption[]>>
   },
+  // 节点是否可以被选中
   selectable: {
+    type: Boolean,
+    default: true
+  },
+  // 是否显示选择框
+  checkable: {
     type: Boolean,
     default: false
   },

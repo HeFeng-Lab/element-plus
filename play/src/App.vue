@@ -135,9 +135,9 @@ const handlerCheckboxChange = (val: string | number | boolean) => {
   <el-button type="warning">Warning</el-button>
   <el-button type="danger">Danger</el-button> -->
 
-  <!--  <el-tree :data="treeData" :default-expanded-keys="['40', '41']"></el-tree>-->
+  <el-tree :data="treeData" :default-expanded-keys="['40', '41']"></el-tree>
   <!--  <el-tree v-model="treeValue" :data="treeData2" :on-load="handleLoad" :selectable="true" :multiple="true"></el-tree>-->
-  <el-tree
+  <!-- <el-tree
     :data="treeValue3"
     :on-load="handleLoad"
     :selectable="true"
@@ -146,7 +146,7 @@ const handlerCheckboxChange = (val: string | number | boolean) => {
     <template #default="{ node }">
       template {{ node.key }} - {{ node.label }}
     </template>
-  </el-tree>
+  </el-tree> -->
 
   <hr />
 

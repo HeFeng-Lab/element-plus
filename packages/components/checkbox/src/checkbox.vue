@@ -16,7 +16,12 @@
         ns.is('indeterminate', props.indeterminate)
       ]"
     >
-      <input :id="props.id" type="checkbox" :class="[ns.e('original')]" />
+      <input
+        :id="props.id"
+        v-model="model"
+        type="checkbox"
+        :class="[ns.e('original')]"
+      />
       <span :class="ns.e('inner')"></span>
     </span>
     <span :class="[ns.e('label')]">
@@ -27,8 +32,8 @@
 
 <script setup lang="ts">
 import { createNamespace } from '@code-lab/element-plus-utils'
-import { ref } from 'vue'
-import { checkboxEmits, checkboxProps, CheckboxValueType } from './checkbox'
+import { computed, ref, watch } from 'vue'
+import { CheckboxValueType, checkboxEmits, checkboxProps } from './checkbox'
 
 defineOptions({
   name: 'ElCheckbox'
@@ -40,24 +45,44 @@ const emits = defineEmits(checkboxEmits)
 
 const ns = createNamespace('checkbox')
 
-const isChecked = ref(false)
+const model = computed<any>({
+  get() {
+    return props.modelValue
+  },
+  set(val) {
+    return emits('update:modelValue', val)
+  }
+})
+
+const isChecked = ref<string | number | boolean>(false)
 
 isChecked.value = props.checked
+
+watch(
+  () => props.modelValue,
+  val => {
+    isChecked.value = val
+  }
+)
 
 const handlerClick = () => {
   if (props.disabled) return
 
   isChecked.value = !isChecked.value
 
-  const value = isChecked.value + ''
+  let result: any = isChecked.value
 
   const map: Record<string, CheckboxValueType> = {
     true: props.trueLabel!,
     false: props.falseLabel!
   }
 
-  emits('change', map[value]!)
-  emits('update:modelValue', map[value]!)
+  if (props.trueLabel || props.falseLabel) {
+    result = map[isChecked.value + '']
+  }
+
+  emits('change', result!)
+  emits('update:modelValue', result!)
 }
 </script>
 

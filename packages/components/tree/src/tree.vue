@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { createNamespace } from '@code-lab/element-plus-utils'
-import { computed, ref, watch, provide, useSlots } from 'vue'
+import { computed, nextTick, provide, ref, useSlots, watch } from 'vue'
+import { CheckboxValueType } from '../../checkbox'
 import {
   Key,
+  TreeOption,
   treeEvents,
   treeInjectionKey,
-  TreeOption,
   treeProps
 } from './tree'
 import type { TreeNode } from './treeNode'
@@ -77,7 +78,8 @@ function createTree(
         isLeaf: node.isLeaf ?? childrenLen == 0,
         children: [],
         rawNode: node,
-        disabled: !!node.disabled
+        disabled: !!node.disabled,
+        parentKey: parent?.key
       }
 
       if (childrenLen > 0) {
@@ -195,9 +197,85 @@ function handlerSelect(node: TreeNode) {
 
   emits('update:modelValue', selectedKeys.value)
 }
+
+const checkedKeysRefs = ref(new Set(props.defaultCheckedKeys))
+const indeterminateRefs = ref<Set<Key>>(new Set())
+
+function isIndeterminate(node: TreeNode) {
+  return indeterminateRefs.value.has(node.key)
+}
+
+function isChecked(node: TreeNode) {
+  return checkedKeysRefs.value.has(node.key)
+}
+
+// 自上而下的选中
+function toggle(node: TreeNode, checked: CheckboxValueType) {
+  if (!node) return
+  const checkedKeys = checkedKeysRefs.value
+
+  if (checked) {
+    // 选中的时候 去掉半选状态
+    indeterminateRefs.value.delete(node.key)
+  }
+  // 维护当前的key列表
+  nextTick(() => {
+    checkedKeys[checked ? 'add' : 'delete'](node.key)
+  })
+  const children = node.children
+  if (children) {
+    children.forEach(childNode => {
+      if (!childNode.disabled) {
+        toggle(childNode, checked)
+      }
+    })
+  }
+}
+
+function findNode(key: Key) {
+  return flattenData.value.find(node => node.key === key)
+}
+
+function updateCheckedKeys(node: TreeNode) {
+  // 自下而上的更新
+  if (node.parentKey) {
+    const parentNode = findNode(node.parentKey as Key)
+
+    if (parentNode) {
+      let allChecked = true //默认儿子应该全选
+      let hasChecked = false // 儿子有没有被选中
+
+      const nodes = parentNode.children
+      for (const node of nodes) {
+        if (checkedKeysRefs.value.has(node.key)) {
+          hasChecked = true // 子节点被选中了
+        } else if (indeterminateRefs.value.has(node.key)) {
+          allChecked = false
+          hasChecked = true
+        } else {
+          allChecked = false
+        }
+      }
+      if (allChecked) {
+        checkedKeysRefs.value.add(parentNode.key)
+        indeterminateRefs.value.delete(parentNode.key)
+      } else if (hasChecked) {
+        checkedKeysRefs.value.delete(parentNode.key)
+        indeterminateRefs.value.add(parentNode.key)
+      }
+      updateCheckedKeys(parentNode)
+    }
+  }
+}
+
+const handlerCheckToggle = (node: TreeNode, val: CheckboxValueType) => {
+  toggle(node, val)
+  updateCheckedKeys(node)
+}
 </script>
 
 <template>
+  checkedKeysRefs: {{ checkedKeysRefs }}
   <div :class="[ns.b()]">
     <ElTreeNode
       v-for="node in flattenData"
@@ -206,8 +284,13 @@ function handlerSelect(node: TreeNode) {
       :expanded="false"
       :loading-keys="loadingKeysRef"
       :selected-keys="selectedKeys"
+      :checkable="props.checkable"
+      :indeterminate="isIndeterminate(node)"
+      :checked="isChecked(node)"
+      :disabled="node.disabled"
       @toggle="toggleExpand"
       @select="handlerSelect"
+      @check="handlerCheckToggle"
     >
     </ElTreeNode>
   </div>
