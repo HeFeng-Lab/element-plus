@@ -118,6 +118,8 @@ const checkStatus = ref(false)
 const handlerCheckboxChange = (val: string | number | boolean) => {
   console.log(val)
 }
+
+const inputValue = ref('Hello world!')
 </script>
 
 <template>
@@ -159,6 +161,10 @@ const handlerCheckboxChange = (val: string | number | boolean) => {
   >
     test
   </ElCheckbox>
+
+  <hr />
+
+  <ElInput v-model="inputValue"></ElInput>
 </template>
 
 <style scoped></style>
