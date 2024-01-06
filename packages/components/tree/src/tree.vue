@@ -275,7 +275,6 @@ const handlerCheckToggle = (node: TreeNode, val: CheckboxValueType) => {
 </script>
 
 <template>
-  checkedKeysRefs: {{ checkedKeysRefs }}
   <div :class="[ns.b()]">
     <ElTreeNode
       v-for="node in flattenData"

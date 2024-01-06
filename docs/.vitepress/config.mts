@@ -30,7 +30,8 @@ export default defineConfig({
         items: [
           { text: 'Icon', link: '/components/icon/index' },
           { text: 'Button', link: '/components/button/index' },
-          { text: 'Checkbox', link: '/components/checkbox/index' }
+          { text: 'Checkbox', link: '/components/checkbox/index' },
+          { text: 'Tree', link: '/components/tree/index' }
         ]
       }
     ],
