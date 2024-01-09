@@ -38,7 +38,12 @@ export const inputProps = {
 export type InputProps = ExtractPropTypes<typeof inputProps>
 
 export const inputEmits = {
-  input: (value: string) => isString(value)
+  'update:modelValue': (value: string) => isString(value),
+  input: (value: string) => isString(value),
+  change: (value: string) => isString(value),
+  focus: (e: FocusEvent) => e instanceof FocusEvent,
+  blur: (e: FocusEvent) => e instanceof FocusEvent,
+  clear: () => true // 清空事件
 }
 
 export type InputEmits = ExtractPropTypes<typeof inputEmits>

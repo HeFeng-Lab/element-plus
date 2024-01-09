@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 // import { Edit } from '@element-plus/icons-vue'
-import { ElCheckbox } from '@code-lab/components'
 import { TreeOption } from '@code-lab/components/tree/src/tree'
 
 const treeData = ref()
@@ -120,6 +119,28 @@ const handlerCheckboxChange = (val: string | number | boolean) => {
 }
 
 const inputValue = ref('Hello world!')
+
+const form = ref({
+  name: ''
+})
+
+const rules = {
+  name: {
+    required: true,
+    message: 'Required.'
+  }
+}
+
+const formEl: any = ref()
+const handlerClick = async () => {
+  formEl.value.validate((valid, fields) => {
+    if (valid) {
+      console.log('submit!')
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
+}
 </script>
 
 <template>
@@ -137,7 +158,7 @@ const inputValue = ref('Hello world!')
   <el-button type="warning">Warning</el-button>
   <el-button type="danger">Danger</el-button> -->
 
-  <el-tree :data="treeData" :default-expanded-keys="['40', '41']"></el-tree>
+  <!-- <el-tree :data="treeData" :default-expanded-keys="['40', '41']"></el-tree> -->
   <!--  <el-tree v-model="treeValue" :data="treeData2" :on-load="handleLoad" :selectable="true" :multiple="true"></el-tree>-->
   <!-- <el-tree
     :data="treeValue3"
@@ -150,7 +171,7 @@ const inputValue = ref('Hello world!')
     </template>
   </el-tree> -->
 
-  <hr />
+  <!-- <hr />
 
   <ElCheckbox
     v-model="checkStatus"
@@ -164,7 +185,16 @@ const inputValue = ref('Hello world!')
 
   <hr />
 
-  <ElInput v-model="inputValue"></ElInput>
+  <ElInput v-model="inputValue"></ElInput> -->
+
+  <hr />
+
+  <ElForm ref="formEl" :model="form" :rules="rules">
+    <ElFormItem prop="name">
+      <ElInput v-model="form.name" size="default"></ElInput>
+    </ElFormItem>
+    <ElButton @click="handlerClick">提交</ElButton>
+  </ElForm>
 </template>
 
 <style scoped></style>

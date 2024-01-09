@@ -10,7 +10,10 @@ export type Type =
   | 'text'
 
 export const buttonProps = {
-  size: String as PropType<Size>,
+  size: {
+    type: String as PropType<Size>,
+    default: 'default'
+  },
   type: {
     type: String as PropType<Type>,
     validator(val: string) {

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@code-lab/element-plus-utils": "workspace:^"
+    "@code-lab/element-plus-utils": "workspace:^",
+    "async-validator": "^4.2.5"
   }
 }

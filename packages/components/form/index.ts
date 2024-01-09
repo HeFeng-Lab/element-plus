@@ -1,11 +1,14 @@
 import Form from './src/form.vue'
+import FormItem from './src/formItem.vue'
 
 import { withInstall } from '@code-lab/element-plus-utils/withInstall'
 
-export const ElForm = withInstall(Form)
-export const ElFormItem = withInstall(Form)
+const ElForm = withInstall(Form)
+const ElFormItem = withInstall(FormItem)
 
-export default ElForm
+export default {}
+
+export { ElForm, ElFormItem }
 
 export * from './src/form'
 export * from './src/formItem'
