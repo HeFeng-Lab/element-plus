@@ -32,7 +32,8 @@ export default defineConfig({
           { text: 'Button', link: '/components/button/index' },
           { text: 'Checkbox', link: '/components/checkbox/index' },
           { text: 'Tree', link: '/components/tree/index' },
-          { text: 'Input', link: '/components/input/index' }
+          { text: 'Input', link: '/components/input/index' },
+          { text: 'Form', link: '/components/form/index' }
         ]
       }
     ],
